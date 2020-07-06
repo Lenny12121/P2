@@ -10,6 +10,14 @@ const session = require('express-session');
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
 
+app.use(
+    session({
+        secret: process.env.SECRET,
+        resave: false,
+        saveUninitialized: false,
+    })
+);
+
 mongoose.connect(mongodbURI, { useNewUrlParser: true, useUnifiedTopology: true } );
 mongoose.connection.once('open', ()=> {
     console.log('I am the Mongod!');
