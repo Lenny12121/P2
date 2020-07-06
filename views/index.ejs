@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feature Requests</title>
+</head>
+<body>
+    <h1>Feature Requests</h1>
+    <button onclick="window.location.href='/feature-requests/new'">Add New</button>    
+    <% for (let i = 0; i < features.length; i++) { %>
+        <div>
+            <a href="/feature-requests/<%= features[i].id %>">
+            <h3> <%= features[i].title %> </h3>
+            </a>
+        </div>
+    <% } %>
+</body>
+</html>

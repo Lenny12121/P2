@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Feature Suggestion</title>
+</head>
+<body>
+    <h1>Edit Feature Suggestion</h1>
+    <form action="/feature-requests/<%=feature.id%>?_method=PUT" method="POST">
+        Title: <input type="text" name="title" value="<%= feature.title %>" required> <br>
+        Description: <textarea name="description" id="description" cols="30" rows="10" required><%= feature.description %></textarea>
+        <input type="submit" name="" value="Submit">
+    </form>
+</body>
+</html>
