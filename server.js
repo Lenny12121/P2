@@ -32,7 +32,10 @@ const userController = require('./controllers/users');
 app.use('/sign-up', userController);
 
 const sessionController = require('./controllers/sessions');
-app.use('/login/', sessionController)
+app.use('/login/', sessionController);
+
+const dashboardController = require('./controllers/dashboard');
+app.use('/dashboard/', dashboardController);
 
 app.listen(PORT, () =>  {
     console.log('I told you not to drink and cook!')
