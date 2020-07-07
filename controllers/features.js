@@ -73,6 +73,18 @@ router.put('/:id', (req, res) => {
     });
 });
 
+router.put('/comments/:id', (req, res) => {
+    console.log(req.body);
+    Features.findByIdAndUpdate(req.params.id,  {$push: {comments: req.body.comments}}, (err, foundFeature) =>  {
+        if (err) {
+            res.send(err);
+            console.log(err);
+        } else {
+            res.redirect('/feature-requests')
+        }
+    });
+});
+
 //delete route
 router.delete('/:id', (req, res) => {
     Features.findByIdAndRemove(req.params.id, {useFindAndModify: false}, (err, deletedFeature) =>   {

@@ -29,7 +29,10 @@ const featuresController = require('./controllers/features.js');
 app.use('/feature-requests', featuresController);
 
 const userController = require('./controllers/users');
-app.use('/users', userController);
+app.use('/sign-up', userController);
+
+const sessionController = require('./controllers/sessions');
+app.use('/login/', sessionController)
 
 app.listen(PORT, () =>  {
     console.log('I told you not to drink and cook!')
