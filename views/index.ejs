@@ -6,6 +6,9 @@
     <title>Feature Requests</title>
 </head>
 <body>
+    <nav>
+        <%- include('./partials/nav.ejs') %>
+    </nav>
     <h1>Feature Requests</h1>
     <button onclick="window.location.href='/feature-requests/new'">Add New</button>    
     <% for (let i = 0; i < features.length; i++) { %>
