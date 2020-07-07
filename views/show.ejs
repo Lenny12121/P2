@@ -8,6 +8,9 @@
 <body>
     <h1>Feature Suggestion</h1>
     <div>
+        <a href="/feature-requests">Back</a>
+    </div>
+    <div>
         <h3><%= feature.title %></h3>
         <p><%= feature.description%></p>
         <form action="/feature-requests/<%=feature.id%>?_method=DELETE" method="POST">
