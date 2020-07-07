@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
+const features = require('./features');
 
 const userSchema = new mongoose.Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    company: { type: String, unique: true, required: true, lowercase: true},
+    company: { type: String, unique: true, required: true, lowercase: true },
     userName: { type: String, unique: true, required: true },
     password: { type: String, unique: true, required: true },
+    featureRequests: [features.schema],
 });
 
 //To make the login persistent on signup run the login code here so users are automatically logged 

@@ -2,6 +2,8 @@ const express = require('express');
 const userRouter = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/users');
+const Features = require('../models/features');
+
 
 userRouter.get('/new', (req, res) => {
     res.render('users/new.ejs',  {

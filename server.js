@@ -3,8 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 require('dotenv').config();
-const PORT = process.env.PORT;
-const mongodbURI = process.env.MONGODBURI;
+const PORT = process.env.PORT || 3000;
+const mongodbURI = process.env.MONGODB_URI || 'mongodb://localhost/' + 'addthat';
 const session = require('express-session');
 
 app.use(express.static('public'));

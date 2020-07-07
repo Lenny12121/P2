@@ -7,42 +7,72 @@ const User = require('../models/users');
 // Index Route
 
 router.get('/:company', (req, res) =>   {
-    Users.find({company: req.params.company}, (err, allFeatures) =>  {
+    console.log('this is the body: ' + req.body)
+    console.log('this is the req.params.company: ' + req.params.company)
+    User.find({company: req.params.company}, (err, foundUser) => {
         if (err) {
             console.log(err);
             res.send(err);
-        } else
+        } else {
+            // console.log(foundUser[0].featureRequests)
             res.render('index.ejs',  {
-                features: allFeatures,
-        });
+                company: req.params.company, 
+                user: foundUser[0],
+            });
+        }
     });
 });
 
 //New Feature Request
-router.get('/new', (req, res) =>  {
-    res.render('new.ejs',  {
+router.get('/:company/new', (req, res) =>  {
+    User.find({company: req.params.company}, (err, foundUser) => {
+        if (err) {
+            console.log(err);
+            res.send(err);
+        } else {
+            console.log(foundUser[0])
+            res.render('new.ejs',  {
+                company: req.params.company, 
+                user: foundUser,
+            });
+        }
     });
 });
 
 router.post('/', (req, res) =>  {
-    Features.create(req.body, (err, newFeature) =>  {
-        if (err) {
-            res.send(err);
-            console.log(err);
-        } else {
-            res.redirect('/feature-requests/');
-        };
+    // console.log(req.body)
+    User.findById(req.body.attachedToCompany, (err, foundUser) =>  {
+        Features.create(req.body, (err, newFeature) =>  {
+            if (err) {
+                res.send(err);
+                console.log(err);
+            } else {
+                foundUser.featureRequests.push(newFeature);
+                foundUser.save((err, data) =>   {
+                    if (err) {
+                        res.send(err);
+                        console.log(err);
+                    } else {
+                        res.redirect('/feature-requests/' + foundUser.company);
+                    }
+                })
+            };
+        });
     });
 });
 
 // Show Route
-router.get('/:id', (req, res) =>  {
+router.get('/:company/:id', (req, res) =>  {
+    console.log('This is the Company: ' + req.params.company)
     Features.findById(req.params.id, (err, foundFeature) => {
         if (err) {
             res.send(err);
             console.log(err);
         } else {
+
+            console.log(foundFeature)
             res.render('show.ejs',  {
+                company: req.params.company,
                 feature: foundFeature,
             });
         }

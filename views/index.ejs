@@ -10,11 +10,12 @@
         <%- include('./partials/nav.ejs') %>
     </nav>
     <h1>Feature Requests</h1>
-    <button onclick="window.location.href='/feature-requests/new'">Add New</button>    
-    <% for (let i = 0; i < features.length; i++) { %>
+    <button onclick="window.location.href='/feature-requests/<%=company%>/new'">Add New</button>    
+    <% console.log('USER: ' + user) 
+    for (let i = 0; i < user.featureRequests.length; i++) { %>
         <div>
-            <a href="/feature-requests/<%= features[i].id %>">
-            <h3> <%= features[i].title %> </h3>
+            <a href="/feature-requests/<%= user.company %>/<%= user.featureRequests[i].id %>">
+            <h3> <%= user.featureRequests[i].title %> </h3>
             </a>
         </div>
     <% } %>

@@ -10,6 +10,8 @@
     <form action="/feature-requests/" method="POST">
         Title: <input type="text" name="title" required> <br>
         Description: <textarea name="description" id="description" cols="30" rows="10" required></textarea>
+        <input  hidden type="text" name="attachedToCompany" value="<%=user[0].id%>" required><br>
+        <input  hidden type="text" name="companyName" value="<%=user[0].company%>" required><br>
         <input type="submit" name="" value="Submit">
     </form>
 </body>
