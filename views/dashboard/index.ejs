@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <nav>
+        <%- include('../partials/nav.ejs') %>
+    </nav>
+    <h1>Dashboard</h1>
+
+    <button onclick="window.location.href='/feature-requests/<%=company%>/new'">Add New</button> 
+    
+    <h2>Latest Feature Requests</h2>
+
+    <% console.log('USER: ' + user) 
+    for (let i = 0; i < user.featureRequests.length; i++) { %>
+        <div>
+            <a href="/feature-requests/<%= user.company %>/<%= user.featureRequests[i].id %>">
+            <h3> <%= user.featureRequests[i].title %> </h3>
+            </a>
+        </div>
+    <% } %>
+</body>
+</html>

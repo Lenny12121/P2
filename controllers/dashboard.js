@@ -11,8 +11,21 @@ const isAuthenticated = (req, res, next) => {
     }
 };
 
-dashboardRouter.get('/:id', (req, res) =>  {
-    res.send('dashboard')
-})
+dashboardRouter.get('/:company', (req, res) =>   {
+    console.log('this is the body: ' + req.body)
+    console.log('this is the req.params.company: ' + req.params.company)
+    User.find({company: req.params.company}, (err, foundUser) => {
+        if (err) {
+            console.log(err);
+            res.send(err);
+        } else {
+            // console.log(foundUser[0].featureRequests)
+            res.render('dashboard/index.ejs',  {
+                company: req.params.company, 
+                user: foundUser[0],
+            });
+        }
+    });
+});
 
 module.exports = dashboardRouter;
