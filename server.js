@@ -28,6 +28,9 @@ const Features = require('./models/features.js');
 const featuresController = require('./controllers/features.js');
 app.use('/feature-requests', featuresController);
 
+const userController = require('./controllers/users');
+app.use('/users', userController);
+
 app.listen(PORT, () =>  {
     console.log('I told you not to drink and cook!')
 })
