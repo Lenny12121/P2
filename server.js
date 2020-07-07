@@ -7,6 +7,7 @@ const PORT = process.env.PORT;
 const mongodbURI = process.env.MONGODBURI;
 const session = require('express-session');
 
+app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
 

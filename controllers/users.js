@@ -16,7 +16,7 @@ userRouter.post('/', (req, res) => {
             res.send(err);
             console.log(err);
         } else {
-            res.redirect('/feature-requests');
+            res.redirect('/feature-requests/' + req.body.company);
         }
     });
 });

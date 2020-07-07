@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 const Features = require('../models/features');
+const User = require('../models/users');
 
 // Index Route
 
-router.get('/', (req, res) =>   {
-    Features.find({}, (err, allFeatures) =>  {
+router.get('/:company', (req, res) =>   {
+    Users.find({company: req.params.company}, (err, allFeatures) =>  {
         if (err) {
             console.log(err);
             res.send(err);
@@ -31,7 +32,7 @@ router.post('/', (req, res) =>  {
         } else {
             res.redirect('/feature-requests/');
         };
-    })
+    });
 });
 
 // Show Route
