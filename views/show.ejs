@@ -14,9 +14,6 @@
     <div>
         <h3><%= feature.title %></h3>
         <p><%= feature.description%></p>
-        <form action="/feature-requests/<%=feature.id%>?_method=DELETE" method="POST">
-            <input type="submit" value="Delete">
-        </form>
         <button onclick="window.location.href='/feature-requests/<%=feature.id%>/edit'">Edit</button>    
     </div>
     <div>

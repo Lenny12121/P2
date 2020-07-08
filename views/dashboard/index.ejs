@@ -24,7 +24,7 @@
             <form action="/dashboard/<%=user.company%>/<%=user.featureRequests[i].id%>?_method=DELETE" method="POST">
                 <input type="submit" value="Delete">
             </form>
-            <button onclick="window.location.href='/feature-requests/<%=user.featureRequests[i].id%>/edit'">Edit</button>    
+            <button onclick="window.location.href='/dashboard/<%=user.company%>/<%=user.featureRequests[i].id%>/edit'">Edit</button>    
         </div>
     <% } %>
 </body>

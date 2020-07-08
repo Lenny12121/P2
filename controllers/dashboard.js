@@ -30,6 +30,38 @@ dashboardRouter.get('/:company', (req, res) =>   {
     });
 });
 
+//edit route
+dashboardRouter.get('/:company/:id/edit', (req, res) => {
+    // res.send('edit me baby')
+    Features.findById(req.params.id, (err, foundFeature) => {
+        if (err) {
+            res.send(err);
+            console.log(err);
+        } else {
+            res.render('dashboard/edit.ejs',  {
+                feature: foundFeature,
+        })}
+    });
+});
+
+dashboardRouter.put('/:company/:id', (req, res) => {
+    console.log('Edit this company:' + req.params.company)
+    Features.findByIdAndUpdate(req.params.id, req.body, (err, foundFeature) =>  {
+        if (err) {
+            res.send(err);
+            console.log(err);
+        } else {
+            User.findOne({company: req.params.company}, (err, foundUser)=>{
+                foundUser.featureRequests.id(req.params.id).remove();
+                foundUser.featureRequests.push(foundFeature);
+                foundUser.save((err, data) => {
+                    res.redirect('/dashboard/' + req.params.company)
+                });
+            });
+        }
+    });
+});
+
 //delete route
 dashboardRouter.delete('/:company/:id', (req, res) => {
     Features.findByIdAndRemove(req.params.id, {useFindAndModify: false}, (err, deletedFeature) =>   {
