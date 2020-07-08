@@ -1,9 +1,12 @@
 <ul>
-    <li>
-      <form action="/login?_method=DELETE" method="POST">
-        <input type="submit" value="Log Out" class="btn-small red" />
-      </form>
-    </li>
-    <li><a href="/sign-up/new">Sign Up</a></li>
-    <li><a href="/login/new">Log In</a></li>
-  </ul>
+  <% if (currentUser) { %>
+  <li>
+    <form action="/login?_method=DELETE" method="POST">
+      <input type="submit" value="Log Out" class="btn-small red" />
+    </form>
+  </li>
+    <% } else { %>
+      <li><a href="/sign-up/new">Sign Up</a></li>
+      <li><a href="/login/new">Log In</a></li>
+    <% } %>
+</ul>

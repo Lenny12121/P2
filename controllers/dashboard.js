@@ -25,6 +25,7 @@ dashboardRouter.get('/:company', (req, res) =>   {
             res.render('dashboard/index.ejs',  {
                 company: req.params.company, 
                 user: foundUser[0],
+                currentUser: req.session.currentUser,
             });
         }
     });
@@ -40,26 +41,51 @@ dashboardRouter.get('/:company/:id/edit', (req, res) => {
         } else {
             res.render('dashboard/edit.ejs',  {
                 feature: foundFeature,
+                currentUser: req.session.currentUser
         })}
     });
 });
 
+// dashboardRouter.put('/:company/:id', (req, res) => {
+//     // console.log('Edit this company:' + req.params.company)
+//     Features.findById(req.params.id)
+//     .then(foundFeature => {
+//         if (!foundFeature) {
+//             res.send('No Feature Found');
+//             console.log(foundFeature);
+//         } else {
+//             console.log('All Features:' + Features);
+//             console.log('this is the found feature: ' + foundFeature);
+//             return foundFeature.set(req.body);
+//         }
+//     })
+//     .then(foundFeature => {
+//         foundFeature.save();
+//     })
+//     .then(foundFeature => {
+//         res.status(202).json(foundFeature);
+//     })
+//     .finally(
+//         res.redirect('/dashboard/' + req.params.company));
+// });
+
 dashboardRouter.put('/:company/:id', (req, res) => {
-    console.log('Edit this company:' + req.params.company)
     Features.findByIdAndUpdate(req.params.id, req.body, (err, foundFeature) =>  {
         if (err) {
             res.send(err);
             console.log(err);
         } else {
-            User.findOne({company: req.params.company}, (err, foundUser)=>{
-                foundUser.featureRequests.id(req.params.id).remove();
-                foundUser.featureRequests.push(foundFeature);
-                foundUser.save((err, data) => {
-                    res.redirect('/dashboard/' + req.params.company)
-                });
-            });
+            return foundFeature;
         }
-    });
+    })
+    .then(foundFeature =>  {
+        User.findOne({company: req.params.company}, (err, foundUser)=>{
+            foundUser.featureRequests.id(req.params.id).remove();
+            foundUser.featureRequests.push(foundFeature);
+            foundUser.save((err, data) => {
+                res.redirect('/dashboard/' + req.params.company);
+        });
+    })});
 });
 
 //delete route

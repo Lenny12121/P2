@@ -18,6 +18,7 @@ router.get('/:company', (req, res) =>   {
             res.render('index.ejs',  {
                 company: req.params.company, 
                 user: foundUser[0],
+                currentUser: req.session.currentUser
             });
         }
     });
@@ -34,6 +35,7 @@ router.get('/:company/new', (req, res) =>  {
             res.render('new.ejs',  {
                 company: req.params.company, 
                 user: foundUser,
+                currentUser: req.session.currentUser
             });
         }
     });
@@ -69,16 +71,15 @@ router.get('/:company/:id', (req, res) =>  {
             res.send(err);
             console.log(err);
         } else {
-
             console.log(foundFeature)
             res.render('show.ejs',  {
                 company: req.params.company,
                 feature: foundFeature,
+                currentUser: req.session.currentUser
             });
         }
     });
 });
-
 
 //Add Comments
 router.put('/comments/:id', (req, res) => {

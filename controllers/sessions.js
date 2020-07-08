@@ -17,7 +17,7 @@ sessionRouter.post('/', (req, res) =>   {
         } else {
             if (bcrypt.compareSync(req.body.password, foundUser.password)) {
                 req.session.currentUser = foundUser;
-                res.redirect('/feature-requests/');
+                res.redirect('/dashboard/' + foundUser.company);
             } else {
                 res.send('Incorrect Username or Password');
             }
@@ -28,10 +28,7 @@ sessionRouter.post('/', (req, res) =>   {
 sessionRouter.delete('/', (req, res) => {
     req.session.destroy(() =>  {
         res.redirect('/feature-requests');
-    })
-})
-
-
-
+    });
+});
 
 module.exports = sessionRouter;

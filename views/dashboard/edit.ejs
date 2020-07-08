@@ -6,6 +6,9 @@
     <title>Edit Feature Suggestion</title>
 </head>
 <body>
+    <nav>
+        <%- include('../partials/nav.ejs') %>
+    </nav>
     <h1>Edit Feature Suggestion</h1>
     <form action="/dashboard/<%=feature.companyName%>/<%=feature.id%>?_method=PUT" method="POST">
         Title: <input type="text" name="title" value="<%= feature.title %>" required> <br>
