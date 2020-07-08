@@ -111,19 +111,24 @@ router.put('/comments/:id', (req, res) => {
             res.send(err);
             console.log(err);
         } else {
-            res.redirect('/feature-requests/' + req.params.id)
+            res.redirect('/feature-requests/' + foundFeature.companyName + '/' + req.params.id)
         }
     });
 });
 
 //delete route
-router.delete('/:id', (req, res) => {
+router.delete('/:company/:id', (req, res) => {
     Features.findByIdAndRemove(req.params.id, {useFindAndModify: false}, (err, deletedFeature) =>   {
         if (err) {
             res.send(err);
             console.log(err);
         } else {
-            res.redirect('/feature-requests');
+            User.findOne({company: req.params.company}, (err, foundUser) => {
+                foundUser.featureRequests.id(req.params.id).remove();
+                foundUser.save((err, data) => {
+                    res.redirect('/feature-requests');
+                });
+            });
         }
     });
 });
