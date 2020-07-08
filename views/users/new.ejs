@@ -3,19 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
     <title>Sign Up</title>
 </head>
 <body>
-    <h1>Sign Up</h1>
+
+    <div class="justify-content-center">
     
-    <form action="/sign-up" method="POST">
-        First Name: <input type="text" name="firstName" id="firstName" placeholder="Enter First Name"><br>
-        Last Name: <input type="text" name="lastName" id="lastName" placeholder="Enter Last Name"><br>
-        Company: <input type="text" name="company" id="company" placeholder="Enter Company"><br>
-        Username: <input type="text" name="userName" id="userName" placeholder="Enter Username"><br>
-        Password: <input type="password" name="password" id="password" placeholder="Enter Password"><br>
-        <input type="submit" value="Sign Up">
-    </form>
+        <form class="signup" action="/sign-up" method="POST">
+
+            <h1>Sign Up</h1>
+            
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" name="firstName" id="firstName"><br>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" name="lastName" id="lastName"><br>
+            </div>
+
+            <div class="form-group">
+                <label for="userName">Email</label>
+                <input type="email" name="userName" id="userName"><br>
+            </div>
+
+            <div class="form-group">
+            <label for="company">Company</label>
+            <input type="text" name="company" id="company"><br>
+            </div>
+
+            <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password"><br>
+            </div>
+
+            <div>
+                <input class="btn btn-primary btn block" type="submit" value="Sign Up">
+            </div>
+
+            <div class="no-account">
+                Already have an account? <a href="/login/new">Login</a>
+            </div>
+
+        </form>
+    </div>
+
+    <footer class="login-footer">
+        <div class="footer-text">
+            <p>
+            Copyright &copy; 2020 &mdash; AddThat | Made with &hearts; in Vienna & London
+            </p> 
+        </div>
+    </footer>
 
 </body>
 </html>

@@ -4,12 +4,40 @@ body {
   background-color: #f4f4f4;
 }
 
+a {
+  color: #43bfbf;
+}
+
+a:hover {
+  color: #43bfbf;
+}
+
 h1  {
   padding: 30px;
   text-align: center;
+  color: #1a3066;
 }
 
-form  {
+input {
+  width: 100%;
+  padding: 5px;
+}
+
+textarea {
+  width: 100%;
+  padding: 5px;
+}
+
+/* input:active {
+  border-color: #43bfbf;
+} */
+
+label {
+  color: #667380;
+  font-weight: 500;
+}
+
+.login, .signup, .new-suggestion  {
   background-color: #fafcfb;
   width: 350px;
   margin-left: auto;
@@ -24,30 +52,33 @@ form  {
   -webkit-border-radius: 10px 10px 10px 10px;
 }
 
-input {
-  width: 100%;
-  padding: 5px;
+.signup {
+  width: 450px;
 }
 
-label {
-  color: #454b52;
+.new-suggestion {
+  width: 500px;
 }
 
 .btn-primary  {
   width: 100%;
   background-color: #43bfbf;
   border-color: #43bfbf;
+  margin-top: 15px;
+  font-weight: 600;
 }
 
-.btn-primary:hover  {
-  width: 100%;
-  background-color: #4dcccc;
-  color: #fafcfb;
+.btn-primary, .btn-primary:active, .btn-primary:visited {
+  background-color: #43bfbf !important;
   border-color: #43bfbf;
 }
 
+.btn-primary:hover  {
+  background-color: #4dcccc !important;
+  border-color: #4dcccc;
+}
+
 .custom-checkbox  {
-  padding-top: 20px;
   padding-bottom: 20px;
 }
 
@@ -56,14 +87,29 @@ label {
   border-color: none;
 }
 
+.no-account {
+  font-size: 12px;
+  text-align: center;
+  margin-top: 20px;
+  color: #667380;
+}
+
+.back {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+
+
 .login-footer {
   max-width: 920px;
   text-align: center;
   position: absolute;
-  bottom: 10px;
+  bottom: 3px;
   width: 100%;
 }
 
 .footer-text  {
-  font-size: 10px;
+  font-size: 9px;
+  color: #667380;
 }

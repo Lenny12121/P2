@@ -3,16 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
     <title>Feature Suggestion</title>
 </head>
+
 <body>
+
     <h1>Suggest A Feature</h1>
-    <form action="/feature-requests/" method="POST">
-        Title: <input type="text" name="title" required> <br>
-        Description: <textarea name="description" id="description" cols="30" rows="10" required></textarea>
-        <input  hidden type="text" name="attachedToCompany" value="<%=user[0].id%>" required><br>
-        <input  hidden type="text" name="companyName" value="<%=user[0].company%>" required><br>
-        <input type="submit" name="" value="Submit">
+    <div class="back">
+        <a class="no-underline" href="/feature-requests/<%=user[0].company%>">
+            <i class="fa fa-arrow-circle-left"></i>
+            Back</a>
+    </div>
+
+    <form class="new-suggestion" action="/feature-requests/" method="POST">
+
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="title" placeholder="Enter a quick overview of your suggestion" required> <br>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label><br>
+            <textarea name="description" id="description" cols="30" rows="10" placeholder="Add more detail about what you would like to see happen or what you have noticed" required></textarea>
+        </div>
+
+        <input  hidden type="text" name="attachedToCompany" value="<%=user[0].id%>" required>
+        <input  hidden type="text" name="companyName" value="<%=user[0].company%>" required>
+        <input class="btn btn-primary btn block" type="submit" name="" value="Submit">
     </form>
+
+    <footer class="login-footer">
+
+        <%- include('./partials/login-signup-footer.ejs') %>
+        
+    </footer>
 </body>
 </html>
