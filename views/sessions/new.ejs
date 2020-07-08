@@ -3,15 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
     <title>Login</title>
 </head>
-<body>
-    <h1>Login</h1>
-    <form action="/login" method="POST">
-        Username: <input type="text" name="userName" id="userName"><br>
-        Password: <input type="password" name="password" id="password"><br>
-        <input type="submit" value="Login">
-    </form>
-    
+<body >
+    <div class="justify-content-center">
+
+  
+        <form action="/login" method="POST">
+            <h1>Login</h1>
+            <div class="form-group">
+                <label for="userName">Username</label><br>
+                <input type="text" name="userName" id="userName"><br>
+            </div>
+
+            <div>
+                <label for="password">Password
+                </label>
+                <a href="forgot.html" class="float-right" style="font-size: 11px ">
+                    Forgot Password?
+                </a><br>
+                <input type="password" name="password" id="password">
+            </div>
+
+            <div class="form-group">
+                <div class="custom-checkbox custom-control">
+                    <input type="checkbox" name="remember" id="remember" class="custom-control-input">
+                    <label for="remember" class="custom-control-label">Remember Me</label>
+                </div>
+            </div>
+
+            <div>
+                <input class="btn btn-primary btn block" id="btn" type="submit" value="Login">
+            </div>
+        </form>
+
+    </div>
+
+        <footer class="login-footer">
+            <div class="footer-text">
+                <p>Made with &hearts; in Vienna & London <br>
+                Copyright &copy; 2020 &mdash; AddThat </p> 
+            </div>
+        </footer>
+        
 </body>
+    
 </html>
