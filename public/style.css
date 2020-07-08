@@ -18,26 +18,28 @@ h1  {
   color: #1a3066;
 }
 
-input {
-  width: 100%;
-  padding: 5px;
+h3, h4  {
+  color: #1a3066;
 }
 
-textarea {
+input, textarea {
   width: 100%;
   padding: 5px;
+  border-color: #667380;
+  border-width: 1px;
 }
 
-/* input:active {
+input:focus, textarea:focus {
   border-color: #43bfbf;
-} */
+  outline-color: #43bfbf;
+}
 
 label {
   color: #667380;
   font-weight: 500;
 }
 
-.login, .signup, .new-suggestion, .edit-suggestion  {
+.login, .signup, .new-suggestion, .edit-suggestion, .feature-suggestion, .new-comment, .comment  {
   background-color: #fafcfb;
   width: 350px;
   margin-left: auto;
@@ -58,6 +60,20 @@ label {
 
 .new-suggestion, .edit-suggestion {
   width: 500px;
+}
+
+.feature-suggestion, .new-comment {
+  width: 90%;
+  margin-bottom: 35px;
+}
+
+.comments, .comment {
+  width: 90%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 30px;
 }
 
 .btn-primary  {
@@ -94,22 +110,42 @@ label {
   color: #667380;
 }
 
+a.no-underline {
+  text-decoration: none;
+}
+
 .back {
   margin-top: 10px;
   margin-bottom: 20px;
 }
 
-
-
 .login-footer {
   max-width: 920px;
-  text-align: center;
+  position: relative;
+  width: 100%;
+}
+
+.signup-footer {
+  max-width: 920px;
   position: absolute;
-  bottom: 3px;
+  bottom: 5px;
   width: 100%;
 }
 
 .footer-text  {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  bottom: 5px;
+  font-size: 9px;
+  color: #667380;
+}
+
+.footer-text  {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  bottom: 5px;
   font-size: 9px;
   color: #667380;
 }

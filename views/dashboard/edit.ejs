@@ -27,15 +27,16 @@
             <input type="text" name="title" value="<%= feature.title %>" required> <br>
         </div>
 
-        <div class="form-group">
-            Description: <textarea name="description" id="description" cols="30" rows="10" required><%= feature.description %></textarea>
+        <div class="form-group"> 
+            <label for="description">Description</label>
+            <textarea name="description" id="description" cols="30" rows="10" required><%= feature.description %></textarea>
         </div>
 
         <input class="btn btn-primary btn block" type="submit" name="" value="Edit">
 
     </form>
 
-    <footer class="login-footer">
+    <footer class="signup-footer">
 
         <%- include('../partials/login-signup-footer.ejs') %>
         

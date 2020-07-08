@@ -3,30 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+    <title>Edit Feature Suggestion</title>
     <title>Suggestion</title>
 </head>
 <body>
     <h1>Feature Suggestion</h1>
-    <div>
-        <a href="/feature-requests/<%=company%>">Back</a>
- 
+
+    <div class="back">
+        <a class="no-underline" href="/feature-requests/<%=company%>">
+            <i class="fa fa-arrow-circle-left"></i>
+            Back</a>
     </div>
-    <div>
-        <h3><%= feature.title %></h3>
+ 
+    <div class="feature-suggestion">
+        <h5><%= feature.title %></h5>
         <p><%= feature.description%></p>  
     </div>
-    <div>
-        <h1>Comments</h1>
+    <div class="comments">
+        <h3>Comments</h3>
+    </div>
         <%for (let i = 0; i < feature.comments.length; i++) { %>
-            <div>
+            <div class="comment">
                 <p> <%= feature.comments[i] %> </p>
             </div>
         <% } %>
-        <h1>New Comment</h1>
-        <form action="/feature-requests/comments/<%= feature.id %>?_method=PUT" method="POST">
-            Comments: <textarea name="comments" id="comments" cols="30" rows="10" required></textarea>
-            <input type="submit" name="" value="Submit">
+    
+        <form class="new-comment" action="/feature-requests/comments/<%= feature.id %>?_method=PUT" method="POST">
+
+            <h3>New Comment</h3>
+
+            <div class="form-group">
+                <textarea class="textarea" name="comments" id="comments" cols="30" rows="10" placeholder="Share your thoughts, show your support." required></textarea>
+            </div>
+
+            <input class="btn btn-primary btn block" type="submit" name="" value="Submit">
         </form>
-    </div>
+
+    <footer class="login-footer">
+
+        <%- include('./partials/login-signup-footer.ejs') %>
+        
+    </footer>
+
 </body>
 </html>
