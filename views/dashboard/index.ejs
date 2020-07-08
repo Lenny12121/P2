@@ -21,7 +21,7 @@
             <a href="/feature-requests/<%= user.company %>/<%= user.featureRequests[i].id %>">
             <h3> <%= user.featureRequests[i].title %> </h3>
             </a>
-            <form action="/feature-requests/<%=user.featureRequests[i].id%>?_method=DELETE" method="POST">
+            <form action="/dashboard/<%=user.company%>/<%=user.featureRequests[i].id%>?_method=DELETE" method="POST">
                 <input type="submit" value="Delete">
             </form>
             <button onclick="window.location.href='/feature-requests/<%=user.featureRequests[i].id%>/edit'">Edit</button>    

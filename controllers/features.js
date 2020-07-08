@@ -116,21 +116,21 @@ router.put('/comments/:id', (req, res) => {
     });
 });
 
-//delete route
-router.delete('/:company/:id', (req, res) => {
-    Features.findByIdAndRemove(req.params.id, {useFindAndModify: false}, (err, deletedFeature) =>   {
-        if (err) {
-            res.send(err);
-            console.log(err);
-        } else {
-            User.findOne({company: req.params.company}, (err, foundUser) => {
-                foundUser.featureRequests.id(req.params.id).remove();
-                foundUser.save((err, data) => {
-                    res.redirect('/feature-requests');
-                });
-            });
-        }
-    });
-});
+// //delete route
+// router.delete('/:company/:id', (req, res) => {
+//     Features.findByIdAndRemove(req.params.id, {useFindAndModify: false}, (err, deletedFeature) =>   {
+//         if (err) {
+//             res.send(err);
+//             console.log(err);
+//         } else {
+//             User.findOne({company: req.params.company}, (err, foundUser) => {
+//                 foundUser.featureRequests.id(req.params.id).remove();
+//                 foundUser.save((err, data) => {
+//                     res.redirect('/feature-requests');
+//                 });
+//             });
+//         }
+//     });
+// });
 
 module.exports = router;
