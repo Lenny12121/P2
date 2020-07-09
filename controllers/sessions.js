@@ -27,7 +27,7 @@ sessionRouter.post('/', (req, res) =>   {
 
 sessionRouter.delete('/', (req, res) => {
     req.session.destroy(() =>  {
-        res.redirect('#');
+        res.redirect('/login/new');
     });
 });
 
