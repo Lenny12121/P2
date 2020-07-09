@@ -13,7 +13,7 @@ const isAuthenticated = (req, res, next) => {
     }
 };
 
-dashboardRouter.get('/:company', (req, res) =>   {
+dashboardRouter.get('/:company', isAuthenticated, (req, res) =>   {
     console.log('this is the body: ' + req.body)
     console.log('this is the req.params.company: ' + req.params.company)
     User.find({company: req.params.company}, (err, foundUser) => {
