@@ -86,28 +86,35 @@ dashboardRouter.put('/:company', (req, res) => {
         upload(req, res, function(err) {                        
             if (req.fileValidationError) {
                 res.send(req.fileValidationError);
-            }
-            else if (!req.file) {
-                res.send('Please select an image to upload');
+                return
             }
             else if (err instanceof multer.MulterError) {
                 res.send(err);
+                return
             }
             else if (err) {
                 res.send(err);
+                return
             }
     
             User.findOne({company: req.params.company}, (err, foundUser) => {
                 foundUser.company = req.body.company;
                 foundUser.description= req.body.description;
-                    for (let index = 0; index < foundUser.featureRequests.length; index++) {
+                for (let index = 0; index < foundUser.featureRequests.length; index++) {
                     foundUser.featureRequests[index].companyName = req.body.company;
-                    };
-                foundUser.logo = req.file.filename;
+                };
+
+                if (!req.file) {
                     foundUser.save((err, data) => {
                         res.redirect('/dashboard/' + foundUser.company);
                     });
-            })
+                }  else {
+                    foundUser.logo = req.file.filename;
+                    foundUser.save((err, data) => {
+                        res.redirect('/dashboard/' + foundUser.company);
+                    });
+                }
+            }) 
         })
 });
 
