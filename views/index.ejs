@@ -18,9 +18,12 @@
         </div> 
     </nav>
 
-    <img class="logo" src="<%= /user.logo" alt="<%= user.company %> Feedback Page">
+    <img class="logo" src="/<%= user.logo %>" alt="<%= user.company %> Feedback Page">
+
 
     <h1 class="all-requests">Feature Requests</h1>
+
+    <p class="description-subtitle"><%= user.description %></p>
 
     <% console.log('USER: ' + user) 
     for (let i = 0; i < user.featureRequests.length; i++) { %>

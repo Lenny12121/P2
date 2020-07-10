@@ -152,6 +152,20 @@ button:focus {
   color: #8c959e;
 }
 
+.description-subtitle {
+  text-align: center;
+  color: #667380;
+}
+
+.logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 300px;
+  max-height: 150px;  
+  padding-bottom: 30px;
+}
+
 .text-truncate  {
   color: #8c959e;
 }
