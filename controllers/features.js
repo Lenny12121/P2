@@ -176,29 +176,61 @@ router.post('/', (req, res) =>  {
 //     });
 // });
 
-
+//Upvote/downvote adapted from here: https://github.com/Binayak07/rentomojo_assignment/blob/master/app.js
 //UPVOTE/DOWNVOTE
 router.post("/upvoted", (req,res) => {
-    console.log('This is the upvote Body ' + req.body.val)
+    // console.log('This is the upvote Body ' + req.body.val)
 	let id=req.body.id;
-	let old=Number(req.body.val);
-    Features.findByIdAndUpdate(id, {upvote: old+1 }, (err, upv) => {
-	if(err) {
-		console.log(err);
-	}
-});
-	res.redirect("/");
+    let old=Number(req.body.val);
+
+    Features.findById(id, (err, foundFeature) =>    {
+        foundFeature.upvote = foundFeature.upvote + 1;
+        console.log('This is the Found Feature: ' + foundFeature)
+        foundFeature.save((err, savedFeature) => {
+            if (err) {
+                res.send(err);
+                console.log(err);
+            } else {
+                console.log('This is the SAVED Feature: ' + savedFeature)
+
+                User.findById(savedFeature.attachedToCompany, (err, foundUser) => {
+                    foundUser.featureRequests.id(savedFeature.id).remove();
+                    foundUser.featureRequests.push(savedFeature);
+                    foundUser.save((err, data) => {
+                        console.log('THIS IS THE FOUND USER: ' + foundUser)
+                        res.redirect('/feature-requests/' + foundUser.company)                    
+                    });
+                })
+            }
+        })
+    });
 });
 
 router.post("/downvoted", (req, res) => {
-    	let id=req.body.id;
-    	let old=Number(req.body.val);
-	Features.findByIdAndUpdate(id, {downvote: old+1 }, (err, dnv) => {
-	if(err) {
-		console.log(err);
-	}
-});
-	res.redirect("/");
+    let id=req.body.id;
+    let old=Number(req.body.val);
+
+    Features.findById(id, (err, foundFeature) =>    {
+        foundFeature.downvote = foundFeature.downvote + 1;
+        console.log('This is the Found Feature: ' + foundFeature)
+        foundFeature.save((err, savedFeature) => {
+            if (err) {
+                res.send(err);
+                console.log(err);
+            } else {
+                console.log('This is the SAVED Feature: ' + savedFeature)
+
+                User.findById(savedFeature.attachedToCompany, (err, foundUser) => {
+                    foundUser.featureRequests.id(savedFeature.id).remove();
+                    foundUser.featureRequests.push(savedFeature);
+                    foundUser.save((err, data) => {
+                        console.log('THIS IS THE FOUND USER: ' + foundUser)
+                        res.redirect('/feature-requests/' + foundUser.company)                    
+                    });
+                })
+            }
+        })
+    });
 });
 
 

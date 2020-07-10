@@ -236,6 +236,8 @@ a.no-underline {
   margin: 5px;
   background-color: #fafcfb;
   border-radius: 10px;
+  width: 90px;
+  text-align: center;
 }
 
 .navbar-light .navbar-toggler {

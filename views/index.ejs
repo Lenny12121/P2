@@ -27,24 +27,15 @@
             <h5> <%= user.featureRequests[i].title %> </h5>
             </a>
             <p class="text-truncate"> <%= user.featureRequests[i].description %> </p>
+
+            <div class="always" >
+                <i id="<%= user.featureRequests[i]._id %>" class="up fa fa-thumbs-up" value="<%= user.featureRequests[i].companyName %>"  aria-hidden="true"></i>&nbsp;&nbsp;
+                <label id="u_<%= user.featureRequests[i]._id %>" ><%= user.featureRequests[i].upvote %></label> &nbsp;&nbsp;&nbsp;
+     
+                <i id="<%= user.featureRequests[i]._id %>" class="down fa fa-thumbs-down" value="<%= user.featureRequests[i].companyName %>" aria-hidden="true"></i>&nbsp;&nbsp;<label id="d_<%= user.featureRequests[i]._id %>"><%= user.featureRequests[i].downvote %></label>
+             </div>
         </div>
     <% } %>
-
-    <div class="container">
-
-        <% for(var i=0;i<user.featureRequests.length;i++) 
-        {
-        %>
-        <div class="always" >
-           <i id="<%= user.featureRequests[i]._id %>" class="up fa fa-thumbs-up" value="<%= user.featureRequests[i].upvote %>"  aria-hidden="true"></i>&nbsp;&nbsp;<label id="u_<%= user.featureRequests[i]._id %>" ><%= user.featureRequests[i].upvote %></label> &nbsp;&nbsp;&nbsp;
-           <i id="<%= user.featureRequests[i]._id %>" class="down fa fa-thumbs-down" value="<%= user.featureRequests[i].upvote %>" aria-hidden="true"></i>&nbsp;&nbsp;<label id="d_<%= user.featureRequests[i]._id %>"><%= user.featureRequests[i].downvote %></label>
-        </div>
-         <br>
-         <%
-         }
-         %>
-         </div>
-    </div>
 
     <footer class="login-footer">
 
@@ -79,7 +70,7 @@
             let curr=$(this).attr('value');
             req= $.ajax({
                 
-                url: '/upvoted',
+                url: '/feature-requests/upvoted',
                 type: 'POST',
                 data: {id: id, val: curr}
                 });
@@ -93,7 +84,7 @@
             let curr=$(this).attr('value');
             req= $.ajax({
                 
-                url: '/downvoted',
+                url: '/feature-requests/downvoted',
                 type: 'POST',
                 data: {id: id,val: curr}
                 });

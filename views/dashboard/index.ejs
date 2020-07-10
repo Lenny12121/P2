@@ -39,10 +39,11 @@
                         <span class="caret"></span></button>
                         <div class="dropdown-menu">
                             <div style="display: flex; flex-direction: column;padding: 0px;">
+                                <button class="float-right edit-delete" onclick="window.location.href='/dashboard/<%=user.company%>/<%=user.featureRequests[i].id%>/edit'">Edit</button> 
                             <form action="/dashboard/<%=user.company%>/<%=user.featureRequests[i].id%>?_method=DELETE" method="POST">
                                 <input class="float-right edit-delete" type="submit" value="Delete">
                             </form>
-                            <button class="float-right edit-delete" onclick="window.location.href='/dashboard/<%=user.company%>/<%=user.featureRequests[i].id%>/edit'">Edit</button> 
+                            
                             </div>
                         </div>
                     </div>
