@@ -186,25 +186,38 @@ a.no-underline {
 }
 
 .login-footer {
-  max-width: 920px;
-  position: relative;
+  position: fixed;
+  left: 0;
+  bottom: 0;
   width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+  background-color: #fafcfb;
 }
 
 .signup-footer {
-  max-width: 920px;
-  position: absolute;
-  bottom: 5px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
   width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+  background-color: #fafcfb;
 }
 
 .footer-text  {
-  position: absolute;
+  /* position: absolute; */
   text-align: center;
   width: 100%;
   bottom: 5px;
   font-size: 9px;
   color: #667380;
+  background-color: #fafcfb;
+  padding-bottom: 3px;
+  padding-top: 5px;
+  margin-bottom: -5px;
 }
 
 .footer-text  {

@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const User = require('../models/users');
 const Features = require('../models/features');
 
-
 const isAuthenticated = (req, res, next) => {
     if (req.session.currentUser) {
         return next()
@@ -12,6 +11,22 @@ const isAuthenticated = (req, res, next) => {
         res.redirect('/login/new');
     }
 };
+
+const multer = require('multer');
+const path = require('path');
+const helpers = require('./helpers');
+
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'uploads/');
+    },
+
+    // By default, multer removes file extensions so let's add them back
+    filename: function(req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
 
 dashboardRouter.get('/:company', isAuthenticated, (req, res) =>   {
     console.log('this is the body: ' + req.body)
@@ -33,7 +48,6 @@ dashboardRouter.get('/:company', isAuthenticated, (req, res) =>   {
 
 //edit route
 dashboardRouter.get('/:company/:id/edit', (req, res) => {
-    // res.send('edit me baby')
     Features.findById(req.params.id, (err, foundFeature) => {
         if (err) {
             res.send(err);
@@ -67,17 +81,34 @@ dashboardRouter.put('/:company/:id', (req, res) => {
 
 //edit user
 dashboardRouter.put('/:company', (req, res) => {
-        User.findOne({company: req.params.company}, (err, foundUser) => {
-            foundUser.company = req.body.company;
-            foundUser.description= req.body.description;
-            for (let index = 0; index < foundUser.featureRequests.length; index++) {
-                foundUser.featureRequests[index].companyName = req.body.company;
-            };
-            // foundUser.logo = 
-            foundUser.save((err, data) => {
-                res.redirect('/dashboard/' + foundUser.company);
-        });
-    })
+    let upload = multer({ storage: storage, fileFilter: helpers.imageFilter }).single('logo');
+
+        upload(req, res, function(err) {                        
+            if (req.fileValidationError) {
+                res.send(req.fileValidationError);
+            }
+            else if (!req.file) {
+                res.send('Please select an image to upload');
+            }
+            else if (err instanceof multer.MulterError) {
+                res.send(err);
+            }
+            else if (err) {
+                res.send(err);
+            }
+    
+            User.findOne({company: req.params.company}, (err, foundUser) => {
+                foundUser.company = req.body.company;
+                foundUser.description= req.body.description;
+                    for (let index = 0; index < foundUser.featureRequests.length; index++) {
+                    foundUser.featureRequests[index].companyName = req.body.company;
+                    };
+                foundUser.logo = req.file.filename;
+                    foundUser.save((err, data) => {
+                        res.redirect('/dashboard/' + foundUser.company);
+                    });
+            })
+        })
 });
 
 //delete route
