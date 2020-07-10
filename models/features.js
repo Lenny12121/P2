@@ -6,6 +6,7 @@ const featuresSchema = new mongoose.Schema({
     comments:  [{type: String}],
     attachedToCompany: { type: String, required: true },
     companyName: { type: String, required: true },
+    image: { type: String },
 });
 
 const Features = mongoose.model('Features', featuresSchema);

@@ -7,6 +7,24 @@ const PORT = process.env.PORT || 3000;
 const mongodbURI = process.env.MONGODB_URI || 'mongodb://localhost/' + 'addthat';
 const session = require('express-session');
 
+//new
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'uploads/');
+    },
+
+    // By default, multer removes file extensions so let's add them back
+    filename: function(req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
+
+
+
+
 app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));

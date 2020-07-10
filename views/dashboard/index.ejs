@@ -9,63 +9,73 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <nav>
+    <nav style="">
         <%- include('../partials/nav.ejs') %>
     </nav>
     
     <h1>Dashboard</h1>
-    
-    <h2>Latest Feature Requests</h2>
 
-    <% console.log('USER: ' + user) 
-    for (let i = 0; i < user.featureRequests.length; i++) { %>
-        <div class="feature-suggestion">
-            <a href="/feature-requests/<%= user.company %>/<%= user.featureRequests[i].id %>">
-            <h5> <%= user.featureRequests[i].title %> </h5>
-            </a>
-            <p class="text-truncate"> <%= user.featureRequests[i].description %> </p>
-            <form action="/dashboard/<%=user.company%>/<%=user.featureRequests[i].id%>?_method=DELETE" method="POST">
-                <input type="submit" value="Delete">
-            </form>
-            <button onclick="window.location.href='/dashboard/<%=user.company%>/<%=user.featureRequests[i].id%>/edit'">Edit</button>    
-        </div>
-    <% } %>
-
-    <div class="container">
-        <ul class="nav nav-pills" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" data-toggle="pill" href="#home">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="pill" href="#menu1">Menu 1</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="pill" href="#menu2">Menu 2</a>
-          </li>
+    <div class="container-fluid">
+        <ul class="nav nav-pills flex-column w-25 p-3" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="pill" href="#requests">Feature Requests</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="pill" href="#menu1">Menu 1</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="pill" href="#menu2">Menu 2</a>
+            </li>
         </ul>
-      
-        <!-- Tab panes -->
-        <div class="tab-content">
-          <div id="home" class="container tab-pane active"><br>
-            <h3>HOME</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          </div>
-          <div id="menu1" class="container tab-pane fade"><br>
-            <h3>Menu 1</h3>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          </div>
-          <div id="menu2" class="container tab-pane fade"><br>
-            <h3>Menu 2</h3>
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-          </div>
-        </div>
-      </div>
 
-</body>
+        <div class="tab-content w-75 p-3">
+            <div id="requests" class="container tab-pane active"><br>
+                <h3 class="tab-title">Latest Feature Requests</h3>
+                <% console.log('USER: ' + user) 
+                for (let i = 0; i < user.featureRequests.length; i++) { %>
+                <div class="feature-suggestion1">
+                    <div class="dropdown float-right">
+                        <button class="dropdown-toggle btn btn-light" type="button" data-toggle="dropdown">Manage
+                        <span class="caret"></span></button>
+                        <div class="dropdown-menu">
+                            <div style="display: flex; flex-direction: column;padding: 0px;">
+                            <form action="/dashboard/<%=user.company%>/<%=user.featureRequests[i].id%>?_method=DELETE" method="POST">
+                                <input class="float-right edit-delete" type="submit" value="Delete">
+                            </form>
+                            <button class="float-right edit-delete" onclick="window.location.href='/dashboard/<%=user.company%>/<%=user.featureRequests[i].id%>/edit'">Edit</button> 
+                            </div>
+                        </div>
+                    </div>
+                <a href="/feature-requests/<%= user.company %>/<%= user.featureRequests[i].id %>">
+                <h5> <%= user.featureRequests[i].title %> </h5>
+                </a> 
+                <p class="text-truncate"> <%= user.featureRequests[i].description %> </p>  
+            </div>
+                <% } %>
+            </div>
+            <div id="menu1" class="container tab-pane fade"><br>
+                <h3>Menu 1</h3>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+            <div id="menu2" class="container tab-pane fade"><br>
+                <h3>Menu 2</h3>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="signup-footer">
+
+        <%- include('../partials/login-signup-footer.ejs') %>
+
+    </footer>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+
 
 <script>
     $(document).ready(function () {
@@ -81,8 +91,11 @@
     $('.third-button').on('click', function () {
 
     $('.animated-icon3').toggleClass('open');
+
     });
 });
 </script>
+
+</body>
 
 </html>

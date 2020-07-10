@@ -41,7 +41,7 @@ label {
   font-weight: 500;
 }
 
-.login, .signup, .new-suggestion, .edit-suggestion, .feature-suggestion, .new-comment, .comment {
+.login, .signup, .new-suggestion, .edit-suggestion, .feature-suggestion, .new-comment, .comment, .feature-suggestion1 {
   background-color: #fafcfb;
   width: 350px;
   margin-left: auto;
@@ -62,10 +62,17 @@ label {
 
 .new-suggestion, .edit-suggestion {
   width: 500px;
+  margin-bottom: 50px;
 }
 
-.feature-suggestion, .new-comment {
+.new-comment, .feature-suggestion {
   width: 90%;
+  margin-bottom: 30px;
+}
+
+.feature-suggestion1 {
+  width: 100%;
+  margin-top: 20px;
   margin-bottom: 35px;
 }
 
@@ -104,6 +111,38 @@ label {
 
 button:focus {
   outline: none;
+}
+
+.navbar-toggler {
+  padding: .25rem .75rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  background-color: transparent;
+  border: 0px solid transparent;
+  border-radius: .25rem;
+}
+
+.edit-delete {
+  background: none;
+  border: 0px;
+  color: #667380;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.edit-delete:hover {
+  background: #4dcccc78;
+}
+
+.dropdown-menu  {
+  padding:0px;
+}
+
+.dropdown-toggle {
+  white-space: nowrap;
+  font-size: 12px;
+  margin-right: -20px;
+  margin-top: -20px;
 }
 
 .text-truncate  {
@@ -168,6 +207,20 @@ a.no-underline {
   bottom: 5px;
   font-size: 9px;
   color: #667380;
+}
+
+.container-fluid  {
+  display: flex;
+}
+
+.tab-title  {
+  margin-top: -20px;
+  padding-left: 10px;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  color: #fafcfb;
+  background-color: #32bfbf;
 }
 
 /* Nav bar taken and adapted using Bootstrap from here: https://mdbootstrap.com/docs/jquery/navigation/hamburger-menu/ */
