@@ -143,6 +143,7 @@ button:focus {
   font-size: 12px;
   margin-right: -20px;
   margin-top: -20px;
+  color: #8c959e;
 }
 
 .text-truncate  {
@@ -231,8 +232,19 @@ a.no-underline {
   margin-right: -30px;
 }
 
+.nav-background {
+  margin: 5px;
+  background-color: #fafcfb;
+  border-radius: 10px;
+}
+
 .navbar-light .navbar-toggler {
   border-color: none !important;
+}
+
+.navbar-nav .nav-link {
+  padding-right: 5px;
+  padding-left: 5px;
 }
 
 .all-requests-nav {

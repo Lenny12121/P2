@@ -30,6 +30,22 @@
         </div>
     <% } %>
 
+    <div class="container">
+
+        <% for(var i=0;i<user.featureRequests.length;i++) 
+        {
+        %>
+        <div class="always" >
+           <i id="<%= user.featureRequests[i]._id %>" class="up fa fa-thumbs-up" value="<%= user.featureRequests[i].upvote %>"  aria-hidden="true"></i>&nbsp;&nbsp;<label id="u_<%= user.featureRequests[i]._id %>" ><%= user.featureRequests[i].upvote %></label> &nbsp;&nbsp;&nbsp;
+           <i id="<%= user.featureRequests[i]._id %>" class="down fa fa-thumbs-down" value="<%= user.featureRequests[i].upvote %>" aria-hidden="true"></i>&nbsp;&nbsp;<label id="d_<%= user.featureRequests[i]._id %>"><%= user.featureRequests[i].downvote %></label>
+        </div>
+         <br>
+         <%
+         }
+         %>
+         </div>
+    </div>
+
     <footer class="login-footer">
 
         <%- include('./partials/login-signup-footer.ejs') %>
@@ -55,6 +71,34 @@
     $('.third-button').on('click', function () {
 
     $('.animated-icon3').toggleClass('open');
+    });
+
+    $(document).ready(function(){
+        $('.up').on("click",function(){
+            let id = $(this).attr('id');
+            let curr=$(this).attr('value');
+            req= $.ajax({
+                
+                url: '/upvoted',
+                type: 'POST',
+                data: {id: id, val: curr}
+                });
+        location.reload(true);   
+        });
+
+    });
+    $(document).ready(function(){
+        $('.down').on("click",function(){
+            let id = $(this).attr('id');
+            let curr=$(this).attr('value');
+            req= $.ajax({
+                
+                url: '/downvoted',
+                type: 'POST',
+                data: {id: id,val: curr}
+                });
+        location.reload(true);    
+        });
     });
 });
 </script>

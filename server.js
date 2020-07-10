@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
     }
 });
 
-
+app.use(express.static('uploads'));
 
 
 app.use(express.static('public'));

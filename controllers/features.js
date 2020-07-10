@@ -29,8 +29,6 @@ const storage = multer.diskStorage({
 // Index Route
 
 router.get('/:company', (req, res) =>   {
-    console.log('this is the body: ' + req.body)
-    console.log('this is the req.params.company: ' + req.params.company)
     User.find({company: req.params.company}, (err, foundUser) => {
         if (err) {
             console.log(err);
@@ -96,16 +94,17 @@ router.post('/', (req, res) =>  {
     console.log('this is the req.body: ' + req.body)
         let upload = multer({ storage: storage, fileFilter: helpers.imageFilter }).single('image');
 
-                        upload(req, res, function(err) {
+        upload(req, res, function(err) {
                         // req.file contains information of uploaded file
                         // req.body contains information of text fields, if there were any
+                        console.log("This is the file: " + req.file);
                         
 
-                        if (req.fileValidationError) {
-                            res.send(req.fileValidationError);
-                        }
-                        else if (!req.file) {
-                        res.send('Please select an image to upload');
+            if (req.fileValidationError) {
+                res.send(req.fileValidationError);
+            }
+            else if (!req.file) {
+                res.send('Please select an image to upload');
                         }
                         else if (err instanceof multer.MulterError) {
                             res.send(err);
@@ -116,10 +115,21 @@ router.post('/', (req, res) =>  {
 
     User.findById(req.body.attachedToCompany, (err, foundUser) =>  {
         console.log('this is the req.file: ' + req.file)
-
-        Features.create(req.body, (err, newFeature) =>  {
+        let newestFeature = {
+            comments: [],
+            upvote: 0,
+            downvote: 0,
+            _id: req.body.id,
+            title: req.body.title,
+            description: req.body.description,
+            attachedToCompany: req.body.attachedToCompany,
+            companyName: req.body.companyName,
+            image: req.file.filename,
+        }
+        Features.create(newestFeature, (err, newFeature) =>  {
+            
             console.log('This is the new feature: ' + newFeature)
-            if (err) {
+            if (err) { 
                 res.send(err);
                 console.log(err);
             } else {
@@ -166,6 +176,30 @@ router.post('/', (req, res) =>  {
 //     });
 // });
 
+
+//UPVOTE/DOWNVOTE
+router.post("/upvoted", (req,res) => {
+    console.log('This is the upvote Body ' + req.body.val)
+	let id=req.body.id;
+	let old=Number(req.body.val);
+    Features.findByIdAndUpdate(id, {upvote: old+1 }, (err, upv) => {
+	if(err) {
+		console.log(err);
+	}
+});
+	res.redirect("/");
+});
+
+router.post("/downvoted", (req, res) => {
+    	let id=req.body.id;
+    	let old=Number(req.body.val);
+	Features.findByIdAndUpdate(id, {downvote: old+1 }, (err, dnv) => {
+	if(err) {
+		console.log(err);
+	}
+});
+	res.redirect("/");
+});
 
 
 
