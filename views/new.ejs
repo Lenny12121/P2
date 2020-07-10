@@ -30,7 +30,10 @@
             <textarea name="description" id="description" cols="30" rows="10" placeholder="Add more detail about what you would like to see happen or what you have noticed" required></textarea>
         </div>
 
-   
+        <div>
+            <label>Image</label>
+            <input type="file" name="image" />
+        </div>
 
         <input  hidden type="text" name="attachedToCompany" value="<%=user[0].id%>" required>
         <input  hidden type="text" name="companyName" value="<%=user[0].company%>" required>
