@@ -65,6 +65,21 @@ dashboardRouter.put('/:company/:id', (req, res) => {
     })});
 });
 
+//edit user
+dashboardRouter.put('/:company', (req, res) => {
+        User.findOne({company: req.params.company}, (err, foundUser) => {
+            foundUser.company = req.body.company;
+            foundUser.description= req.body.description;
+            for (let index = 0; index < foundUser.featureRequests.length; index++) {
+                foundUser.featureRequests[index].companyName = req.body.company;
+            };
+            // foundUser.logo = 
+            foundUser.save((err, data) => {
+                res.redirect('/dashboard/' + foundUser.company);
+        });
+    })
+});
+
 //delete route
 dashboardRouter.delete('/:company/:id', (req, res) => {
     Features.findByIdAndRemove(req.params.id, {useFindAndModify: false}, (err, deletedFeature) =>   {

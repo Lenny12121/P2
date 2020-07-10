@@ -37,7 +37,7 @@ router.get('/:company', (req, res) =>   {
             // console.log(foundUser[0].featureRequests)
             res.render('index.ejs',  {
                 company: req.params.company, 
-                user: foundUser[0],
+                user: foundUser[0],  
                 currentUser: req.session.currentUser
             });
         }

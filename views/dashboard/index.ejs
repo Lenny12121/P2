@@ -21,7 +21,7 @@
                 <a class="nav-link active" data-toggle="pill" href="#requests">Feature Requests</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="pill" href="#menu1">Menu 1</a>
+                <a class="nav-link" data-toggle="pill" href="#pageSettings">Page Settings</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="pill" href="#menu2">Menu 2</a>
@@ -30,6 +30,9 @@
 
         <div class="tab-content w-75 p-3">
             <div id="requests" class="container tab-pane active"><br>
+                <!-- <div class="w-33 p-3 stats"></div>
+                <div class="w-33 p-3 stats"></div>
+                <div class="w-33 p-3 stats"></div> -->
                 <h3 class="tab-title">Latest Feature Requests</h3>
                 <% console.log('USER: ' + user) 
                 for (let i = 0; i < user.featureRequests.length; i++) { %>
@@ -54,10 +57,44 @@
             </div>
                 <% } %>
             </div>
-            <div id="menu1" class="container tab-pane fade"><br>
-                <h3>Menu 1</h3>
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+            <div id="pageSettings" class="container tab-pane fade"><br>
+                <form style="margin-top: 0px;" class="feature-suggestion1"
+                action="/dashboard/<%=user.company%>?_method=PUT" method="POST">
+                    <h3 style="text-align: center; padding-bottom: 20px;">Page Settings</h3>
+
+                    <div class="form-group">
+                        <label style="margin-bottom: 0px" for="company">Page Name</label>
+                        <p class="subdescription">The name of your page and url displayed to your users. Careful, changing this also changes your subdomain.</p>
+                        <input type="text" name="company" value="<%= user.company %>" required> <br>
+                    </div>
+
+                    <div class="form-group">
+                        <label style="margin-bottom: 0px; margin-top: 15px;" for="description">Description</label>
+                        <p class="subdescription">Displayed on your public feature request page.</p>
+
+                        <textarea name="description" id="description" cols="30" rows="5"><%= user.description %></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <div class='custom-file'>
+                        <label class="custom-file-label" for="customFile" style="margin-bottom: 0px; margin-top: 15px;" for="logo">Upload Your Logo</label>
+                        <input class="custom-file-input" id="customFile" type="file" name="logo">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label style="margin-bottom: 0px; margin-top: 15px;" for="description">Custom Domain</label>
+                        <p class="subdescription">Set your own domain for your feedback page. Only available on paid plans, please get in touch.</p>
+
+                        <p><a class="btn btn-secondary" href="mailto:someone@example.com">Contact Us</a></p>
+                    </div>
+
+                    <input class="btn btn-primary btn block" type="submit" name="" value="Save">
+
+                 </form>
             </div>
+
             <div id="menu2" class="container tab-pane fade"><br>
                 <h3>Menu 2</h3>
                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
@@ -65,7 +102,7 @@
         </div>
     </div>
 
-    <footer class="signup-footer">
+    <footer class="login-footer">
 
         <%- include('../partials/login-signup-footer.ejs') %>
 
@@ -94,6 +131,11 @@
     $('.animated-icon3').toggleClass('open');
 
     });
+
+    $(".custom-file-input").on("change", function() {
+    let fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
 });
 </script>
 

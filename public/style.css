@@ -29,6 +29,7 @@ input, textarea {
   padding: 5px;
   border-color: #667380;
   border-width: 1px;
+  color: #667380;
 }
 
 input:focus, textarea:focus {
@@ -138,6 +139,11 @@ button:focus {
   padding:0px;
 }
 
+.subdescription {
+  color: #8c959e;
+  font-size: 12px;
+}
+
 .dropdown-toggle {
   white-space: nowrap;
   font-size: 12px;
@@ -223,6 +229,7 @@ a.no-underline {
   color: #fafcfb;
   background-color: #32bfbf;
 }
+
 
 /* Nav bar taken and adapted using Bootstrap from here: https://mdbootstrap.com/docs/jquery/navigation/hamburger-menu/ */
 
