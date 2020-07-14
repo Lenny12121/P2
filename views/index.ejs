@@ -26,8 +26,7 @@
 
     <p class="description-subtitle"><%= user.description %></p>
 
-    <% console.log('USER: ' + user) 
-    for (let i = 0; i < user.featureRequests.length; i++) { %>
+    <% for (let i = 0; i < user.featureRequests.length; i++) { %>
         <div class="feature-suggestion">
             <a href="/feature-requests/<%= user.company %>/<%= user.featureRequests[i].id %>">
             <h5> <%= user.featureRequests[i].title %> </h5>

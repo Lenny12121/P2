@@ -57,15 +57,13 @@ router.get('/:company/new', (req, res) =>  {
 const helpers = require('./helpers');
 
 router.post('/', (req, res) =>  {
-        
-    console.log('this is the req.body: ' + req.body)
-        let upload = multer({ storage: storage, fileFilter: helpers.imageFilter }).single('image');
+    let upload = multer({ storage: storage, fileFilter: helpers.imageFilter }).single('image');
 
-        upload(req, res, function(err) {
-            if (req.fileValidationError) {
-                res.send(req.fileValidationError);
-                return
-            }
+    upload(req, res, function(err) {
+        if (req.fileValidationError) {
+            res.send(req.fileValidationError);
+            return
+        }
 
     User.findById(req.body.attachedToCompany, (err, foundUser) =>  {
         if (!req.file) {
