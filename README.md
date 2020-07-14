@@ -1,6 +1,6 @@
 ## Description:
 
-Here we built a feature request tracking app so that product owners can easily gain feedback from their users. There is a dashboard view where the admin can manage the feature suggestions as well as a public page that the admin can customise and integrate into  their product to collect feedback from users. Stop guessing and start building what your customers actually want.
+This is a full-CRUD feature request tracking app so that product owners can easily gain feedback from their users. There is a dashboard view where the admin can manage the feature suggestions as well as a public page that the admin can customise and integrate into  their product to collect feedback from users. Stop guessing and start building what your customers actually want.
 
 To make the code more readable it has been re-factored to utilise various controllers and partials for the navigation and footer have been implemented.
 
