@@ -61,28 +61,6 @@ router.get('/:company/new', (req, res) =>  {
     });
 });
 
-// router.post('/', (req, res) =>  {
-//     // console.log(req.body)
-//     User.findById(req.body.attachedToCompany, (err, foundUser) =>  {
-//         Features.create(req.body, (err, newFeature) =>  {
-//             if (err) {
-//                 res.send(err);
-//                 console.log(err);
-//             } else {
-//                 foundUser.featureRequests.push(newFeature);
-//                 foundUser.save((err, data) =>   {
-//                     if (err) {
-//                         res.send(err);
-//                         console.log(err);
-//                     } else {
-//                         res.redirect('/feature-requests/' + foundUser.company);
-//                     }
-//                 })
-//             };
-//         });
-//     });
-// });
-
 
 //NEW
 //Used Multer walkthrough from here:  https://stackabuse.com/handling-file-uploads-in-node-js-with-expres-and-multer/
@@ -95,26 +73,15 @@ router.post('/', (req, res) =>  {
         let upload = multer({ storage: storage, fileFilter: helpers.imageFilter }).single('image');
 
         upload(req, res, function(err) {
-                        // req.file contains information of uploaded file
-                        // req.body contains information of text fields, if there were any
-                        console.log("This is the file: " + req.file);
-                        
-
             if (req.fileValidationError) {
                 res.send(req.fileValidationError);
+                return
             }
-            else if (!req.file) {
-                res.send('Please select an image to upload');
-                        }
-                        else if (err instanceof multer.MulterError) {
-                            res.send(err);
-                        }
-                        else if (err) {
-                            res.send(err);
-                        }
 
     User.findById(req.body.attachedToCompany, (err, foundUser) =>  {
-        console.log('this is the req.file: ' + req.file)
+        if (!req.file) {
+            req.file = ''
+        }
         let newestFeature = {
             comments: [],
             upvote: 0,
@@ -127,14 +94,23 @@ router.post('/', (req, res) =>  {
             image: req.file.filename,
         }
         Features.create(newestFeature, (err, newFeature) =>  {
-            
-            console.log('This is the new feature: ' + newFeature)
             if (err) { 
                 res.send(err);
                 console.log(err);
             } else {
-                foundUser.featureRequests.push(newFeature);
-                foundUser.save((err, data) =>   {
+                if (!req.file) {
+                    foundUser.featureRequests.push(newFeature);
+                    foundUser.save((err, data) =>   {
+                        if (err) {
+                            res.send(err);
+                            console.log(err);
+                        } else {
+                            res.redirect('/feature-requests/' + foundUser.company);
+                        }
+                })
+                }  else {
+                    foundUser.featureRequests.push(newFeature);
+                    foundUser.save((err, data) =>   {
                     if (err) {
                         res.send(err);
                         console.log(err);
@@ -142,6 +118,7 @@ router.post('/', (req, res) =>  {
                         res.redirect('/feature-requests/' + foundUser.company);
                     }
                 })
+                }
             };
         });
     });

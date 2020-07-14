@@ -88,14 +88,6 @@ dashboardRouter.put('/:company', (req, res) => {
                 res.send(req.fileValidationError);
                 return
             }
-            else if (err instanceof multer.MulterError) {
-                res.send(err);
-                return
-            }
-            else if (err) {
-                res.send(err);
-                return
-            }
     
             User.findOne({company: req.params.company}, (err, foundUser) => {
                 foundUser.company = req.body.company;
