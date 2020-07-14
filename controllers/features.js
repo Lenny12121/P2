@@ -4,7 +4,6 @@ const router = express.Router();
 const Features = require('../models/features');
 const User = require('../models/users');
 
-//new
 const multer = require('multer');
 const path = require('path');
 
@@ -13,18 +12,10 @@ const storage = multer.diskStorage({
         cb(null, 'uploads/');
     },
 
-    // By default, multer removes file extensions so let's add them back
     filename: function(req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });
-
-
-
-
-
-
-
 
 // Index Route
 
@@ -34,7 +25,6 @@ router.get('/:company', (req, res) =>   {
             console.log(err);
             res.send(err);
         } else {
-            // console.log(foundUser[0].featureRequests)
             res.render('index.ejs',  {
                 company: req.params.company, 
                 user: foundUser[0],  
@@ -60,7 +50,6 @@ router.get('/:company/new', (req, res) =>  {
         }
     });
 });
-
 
 //NEW
 //Used Multer walkthrough from here:  https://stackabuse.com/handling-file-uploads-in-node-js-with-expres-and-multer/
@@ -128,25 +117,20 @@ router.post('/', (req, res) =>  {
 //Upvote/downvote adapted from here: https://github.com/Binayak07/rentomojo_assignment/blob/master/app.js
 //UPVOTE/DOWNVOTE
 router.post("/upvoted", (req,res) => {
-    // console.log('This is the upvote Body ' + req.body.val)
 	let id=req.body.id;
     let old=Number(req.body.val);
 
     Features.findById(id, (err, foundFeature) =>    {
         foundFeature.upvote = foundFeature.upvote + 1;
-        console.log('This is the Found Feature: ' + foundFeature)
         foundFeature.save((err, savedFeature) => {
             if (err) {
                 res.send(err);
                 console.log(err);
             } else {
-                console.log('This is the SAVED Feature: ' + savedFeature)
-
                 User.findById(savedFeature.attachedToCompany, (err, foundUser) => {
                     foundUser.featureRequests.id(savedFeature.id).remove();
                     foundUser.featureRequests.push(savedFeature);
                     foundUser.save((err, data) => {
-                        console.log('THIS IS THE FOUND USER: ' + foundUser)
                         res.redirect('/feature-requests/' + foundUser.company)                    
                     });
                 })
@@ -161,19 +145,15 @@ router.post("/downvoted", (req, res) => {
 
     Features.findById(id, (err, foundFeature) =>    {
         foundFeature.downvote = foundFeature.downvote + 1;
-        console.log('This is the Found Feature: ' + foundFeature)
         foundFeature.save((err, savedFeature) => {
             if (err) {
                 res.send(err);
                 console.log(err);
             } else {
-                console.log('This is the SAVED Feature: ' + savedFeature)
-
                 User.findById(savedFeature.attachedToCompany, (err, foundUser) => {
                     foundUser.featureRequests.id(savedFeature.id).remove();
                     foundUser.featureRequests.push(savedFeature);
                     foundUser.save((err, data) => {
-                        console.log('THIS IS THE FOUND USER: ' + foundUser)
                         res.redirect('/feature-requests/' + foundUser.company)                    
                     });
                 })
@@ -184,13 +164,11 @@ router.post("/downvoted", (req, res) => {
 
 // Show Route
 router.get('/:company/:id', (req, res) =>  {
-    console.log('This is the Company: ' + req.params.company)
     Features.findById(req.params.id, (err, foundFeature) => {
         if (err) {
             res.send(err);
             console.log(err);
         } else {
-            console.log(foundFeature)
             res.render('show.ejs',  {
                 company: req.params.company,
                 feature: foundFeature,
@@ -202,7 +180,6 @@ router.get('/:company/:id', (req, res) =>  {
 
 //Add Comments
 router.put('/comments/:id', (req, res) => {
-    console.log(req.body);
     Features.findByIdAndUpdate(req.params.id,  {$push: {comments: req.body.comments}}, (err, foundFeature) =>  {
         if (err) {
             res.send(err);

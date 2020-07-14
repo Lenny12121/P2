@@ -22,21 +22,17 @@ const storage = multer.diskStorage({
         cb(null, 'uploads/');
     },
 
-    // By default, multer removes file extensions so let's add them back
     filename: function(req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });
 
 dashboardRouter.get('/:company', isAuthenticated, (req, res) =>   {
-    console.log('this is the body: ' + req.body)
-    console.log('this is the req.params.company: ' + req.params.company)
     User.find({company: req.params.company}, (err, foundUser) => {
         if (err) {
             console.log(err);
             res.send(err);
         } else {
-            // console.log(foundUser[0].featureRequests)
             res.render('dashboard/index.ejs',  {
                 company: req.params.company, 
                 user: foundUser[0],
